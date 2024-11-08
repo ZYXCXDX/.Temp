@@ -1,0 +1,939 @@
+port: 7890
+socks-port: 7891
+redir-port: 7892
+mixed-port: 7893
+tproxy-port: 7895
+ipv6: false
+mode: rule
+log-level: silent # info / warning / error / debug / silent
+allow-lan: true
+external-controller: 0.0.0.0:9090
+# external-ui: ui
+# external-ui-url: "https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip"
+secret: ""
+bind-address: "*"
+unified-delay: true
+geodata-loader: memconservative # standard / memconservative
+geodata-mode: false # dont forget make true for use geodata
+geo-auto-update: true
+geo-update-interval: 24
+geox-url:
+  geoip: "https://github.com/malikshi/v2ray-rules-dat/releases/latest/download/geoip.dat"
+  geosite: "https://github.com/malikshi/v2ray-rules-dat/releases/latest/download/geosite.dat"
+  mmdb: "https://github.com/Loyalsoldier/geoip/releases/latest/download/Country.mmdb"
+  asn: "https://github.com/xishang0128/geoip/releases/download/latest/GeoLite2-ASN.mmdb"
+profile:
+  store-selected: true
+  store-fake-ip: true
+sniffer:
+  enable: true
+  force-dns-mapping: true
+  parse-pure-ip: true
+  override-destination: true
+  sniff:
+    TLS:
+      ports: [443, 8443]
+    HTTP:
+      ports: [80, 8080-8880]
+      override-destination: true
+    QUIC:
+      ports: [443,8443]
+      override-destination: true
+tun:
+  enable: false
+  mtu: 9000
+  device: tun0
+  stack: mixed # gvisor / mixed / lwip
+  dns-hijack:
+    - any:53
+    - tcp://any:53
+  auto-route: true
+  strict-route: false
+  auto-redirect: true
+  auto-detect-interface: true
+  include-android-user: [0, 10]
+  exclude-package: []
+  include-package: []
+  keep-alive-interval: 30
+  global-client-fingerprint: random
+  tcp-concurrent: false
+dns:
+  enable: true
+  ipv6: false
+  prefer-h3: false
+  use-host: true
+  enhanced-mode: fake-ip
+  listen: 0.0.0.0:7874
+  nameserver:
+  - https://cloudflare-dns.com/dns-query
+  - https://dns.google/dns-query
+  fallback:
+  - tls://1.1.1.1
+  - tls://8.8.4.4
+  default-nameserver:
+  - 8.8.8.8
+  - 8.8.4.4
+  - 1.1.1.1
+  - 1.0.0.1
+  proxy-server-nameserver:
+  - 112.215.203.246 #DNS XL
+  - 112.215.203.247 #DNS XL
+  - 112.215.203.248 #DNS XL
+  - 112.215.203.254 #DNS XL
+  - 112.215.198.248 #DNS XL
+  - 112.215.198.254 #DNS XL
+  - "[2400:9800:2:2::246]" # DNS XL
+  nameserver-policy:
+    '+.googlesyndication.com': '1.1.1.1'
+    'geosite:category-ads-all': rcode://success
+  respect-rules: true
+  fake-ip-range: 198.18.0.1/16
+  fake-ip-filter-mode: blacklist
+  fake-ip-filter:
+  - "*.lan"
+  - "*.localdomain"
+  - "*.example"
+  - "*.invalid"
+  - "*.localhost"
+  - "*.test"
+  - "*.local"
+  - "*.home.arpa"
+  - time.*.com
+  - time.*.gov
+  - time.*.edu.cn
+  - time.*.apple.com
+  - time1.*.com
+  - time2.*.com
+  - time3.*.com
+  - time4.*.com
+  - time5.*.com
+  - time6.*.com
+  - time7.*.com
+  - ntp.*.com
+  - ntp1.*.com
+  - ntp2.*.com
+  - ntp3.*.com
+  - ntp4.*.com
+  - ntp5.*.com
+  - ntp6.*.com
+  - ntp7.*.com
+  - "*.time.edu.cn"
+  - "*.ntp.org.cn"
+  - "+.pool.ntp.org"
+  - time1.cloud.tencent.com
+  - music.163.com
+  - "*.music.163.com"
+  - "*.126.net"
+  - musicapi.taihe.com
+  - music.taihe.com
+  - songsearch.kugou.com
+  - trackercdn.kugou.com
+  - "*.kuwo.cn"
+  - api-jooxtt.sanook.com
+  - api.joox.com
+  - joox.com
+  - y.qq.com
+  - "*.y.qq.com"
+  - streamoc.music.tc.qq.com
+  - mobileoc.music.tc.qq.com
+  - isure.stream.qqmusic.qq.com
+  - dl.stream.qqmusic.qq.com
+  - aqqmusic.tc.qq.com
+  - amobile.music.tc.qq.com
+  - "*.xiami.com"
+  - "*.music.migu.cn"
+  - music.migu.cn
+  - "+.msftconnecttest.com"
+  - "+.msftncsi.com"
+  - msftconnecttest.com
+  - msftncsi.com
+  - localhost.ptlogin2.qq.com
+  - localhost.sec.qq.com
+  - "+.srv.nintendo.net"
+  - "*.n.n.srv.nintendo.net"
+  - "+.stun.playstation.net"
+  - xbox.*.*.microsoft.com
+  - "*.*.xboxlive.com"
+  - xbox.*.microsoft.com
+  - xnotify.xboxlive.com
+  - "+.battlenet.com.cn"
+  - "+.wotgame.cn"
+  - "+.wggames.cn"
+  - "+.wowsgame.cn"
+  - "+.wargaming.net"
+  - proxy.golang.org
+  - stun.*.*
+  - stun.*.*.*
+  - "+.stun.*.*"
+  - "+.stun.*.*.*"
+  - "+.stun.*.*.*.*"
+  - "+.stun.*.*.*.*.*"
+  - heartbeat.belkin.com
+  - "*.linksys.com"
+  - "*.linksyssmartwifi.com"
+  - "*.router.asus.com"
+  - mesu.apple.com
+  - swscan.apple.com
+  - swquery.apple.com
+  - swdownload.apple.com
+  - swcdn.apple.com
+  - swdist.apple.com
+  - lens.l.google.com
+  - stun.l.google.com
+  - "+.nflxvideo.net"
+  - "*.square-enix.com"
+  - "*.finalfantasyxiv.com"
+  - "*.ffxiv.com"
+  - "*.ff14.sdo.com"
+  - ff.dorado.sdo.com
+  - "*.mcdn.bilivideo.cn"
+  - "+.media.dssott.com"
+  - time-ios.apple.com
+  - shark007.net
+  fallback-filter:
+    geoip: true
+    geoip-code: ID
+    ipcidr:
+    - 0.0.0.0/8
+    - 10.0.0.0/8
+    - 100.64.0.0/10
+    - 127.0.0.0/8
+    - 169.254.0.0/16
+    - 172.16.0.0/12
+    - 192.0.0.0/24
+    - 192.0.2.0/24
+    - 192.88.99.0/24
+    - 192.168.0.0/16
+    - 198.18.0.0/15
+    - 198.51.100.0/24
+    - 203.0.113.0/24
+    - 224.0.0.0/4
+    - 240.0.0.0/4
+    - 255.255.255.255/32
+    domain:
+    - "+.google.com"
+    - "+.facebook.com"
+    - "+.youtube.com"
+    - "+.githubusercontent.com"
+    - "+.googlevideo.com"
+    - "+.msftconnecttest.com"
+    - "+.msftncsi.com"
+    - msftconnecttest.com
+    - msftncsi.com
+    - "+.*"
+proxies:
+proxy-providers:     
+      
+  Account Indonesian:
+    type: file
+    path: ./account/Indonesian.yaml
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 99
+      
+  Account Singapore:
+    type: file
+    path: ./account/Singapore.yaml
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 99
+      
+  Account Vmess:
+    type: file
+    path: ./account/Vmess.yaml
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 99
+      
+  Account Vless:
+    type: file
+    path: ./account/Vless.yaml
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 99
+      
+  Account Trojan:
+    type: file
+    path: ./account/Trojan.yaml
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 99
+      
+  Subscription:
+      type: http
+      path: ./account/Subscription.yaml
+      url: https://vltr.vpnoir8r.us.kg/v2ray/vless/wildcard?ws=quiz.int.vidio.com
+      
+proxy-groups:
+
+- name: Traffic General
+  type: select
+  proxies:
+  - Best Latency
+  - Load Balance
+  - Fallback
+  - Manual Selected
+  - Account Indonesian
+  - Account Singapore
+  - Account Vmess
+  - Account Vless
+  - Account Trojan
+  - Subscription
+  
+- name: Traffic Indonesian
+  type: select
+  disable-udp: false
+  proxies:
+  - Best Latency
+  - Load Balance
+  - Fallback
+  - Manual Selected
+  - Traffic General   
+  - Account Indonesian
+  - Account Singapore
+  - Account Vmess
+  - Account Vless
+  - Account Trojan
+  - Subscription
+  
+- name: Account Indonesian
+  type: url-test
+  url: https://www.gstatic.com/generate_204
+  interval: 300
+  tolerance: 50
+  strategy: round-robin
+  disable-udp: false
+  use:
+  - Account Indonesian
+  
+- name: Account Singapore
+  type: url-test
+  url: https://www.gstatic.com/generate_204
+  interval: 300
+  tolerance: 50
+  strategy: round-robin
+  disable-udp: false
+  use:
+  - Account Singapore
+  
+- name: Account Vmess
+  type: url-test
+  url: https://www.gstatic.com/generate_204
+  interval: 300
+  tolerance: 50
+  strategy: round-robin
+  disable-udp: false
+  use:
+  - Account Vmess
+  
+- name: Account Vless
+  type: url-test
+  url: https://www.gstatic.com/generate_204
+  interval: 300
+  tolerance: 50
+  strategy: round-robin
+  disable-udp: false
+  use:
+  - Account Vless
+  
+- name: Account Trojan
+  type: url-test
+  url: https://www.gstatic.com/generate_204
+  interval: 300
+  tolerance: 50
+  strategy: round-robin
+  disable-udp: false
+  use:
+  - Account Trojan
+  
+- name: Subscription
+  type: url-test
+  url: https://www.gstatic.com/generate_204
+  interval: 300
+  tolerance: 50
+  strategy: round-robin
+  disable-udp: false
+  use:
+  - Subscription
+      
+- name: Best Latency
+  type: url-test
+  url: https://www.gstatic.com/generate_204
+  interval: 300
+  tolerance: 50
+  proxies:
+  - Account Indonesian
+  - Account Singapore
+  - Account Vmess
+  - Account Vless
+  - Account Trojan
+  - Subscription
+  
+- name: Load Balance
+  type: load-balance
+  url: https://www.gstatic.com/generate_204
+  interval: 300
+  proxies:
+  - Account Indonesian
+  - Account Singapore
+  - Account Vmess
+  - Account Vless
+  - Account Trojan
+  - Subscription
+  
+- name: Fallback
+  type: fallback
+  lazy: true
+  disable-udp: false
+  proxies:
+  - Account Indonesian
+  - Account Singapore
+  - Account Vmess
+  - Account Vless
+  - Account Trojan
+  - Subscription
+  
+- name: Manual Selected
+  type: select
+  disable-udp: false
+  use:
+  - Account Indonesian
+  - Account Singapore
+  - Account Vmess
+  - Account Vless
+  - Account Trojan
+  - Subscription    
+  
+- name: Gaming
+  type: select
+  disable-udp: false
+  proxies:
+  - Best Latency
+  - Load Balance
+  - Fallback
+  - Manual Selected
+  - Account Indonesian
+  - Account Singapore
+  - Account Vmess
+  - Account Vless
+  - Account Trojan
+  - Subscription
+              
+- name: Block Ads
+  type: select
+  disable-udp: false
+  proxies:
+  - REJECT
+  - Best Latency
+  - Load Balance
+  - Fallback
+  - Manual Selected  
+  - Traffic General
+  - Account Indonesian
+  - Account Singapore
+  - Account Vmess
+  - Account Vless
+  - Account Trojan
+  - Subscription
+    
+- name: Social Media
+  type: select 
+  disable-udp: false
+  proxies:
+  - Best Latency
+  - Load Balance
+  - Fallback
+  - Manual Selected
+  - Traffic General
+  - Account Indonesian
+  - Account Singapore
+  - Account Vmess
+  - Account Vless
+  - Account Trojan
+  - Subscription
+   
+- name: Streaming
+  type: select 
+  disable-udp: false
+  proxies:
+  - Best Latency
+  - Load Balance
+  - Fallback
+  - Manual Selected
+  - Traffic General
+  - Account Indonesian
+  - Account Singapore
+  - Account Vmess
+  - Account Vless
+  - Account Trojan
+  - Subscription
+        
+- name: Online Shop
+  type: select
+  disable-udp: false
+  proxies:
+  - Best Latency
+  - Load Balance
+  - Fallback
+  - Manual Selected
+  - Traffic General 
+  - Account Indonesian
+  - Account Singapore
+  - Account Vmess
+  - Account Vless
+  - Account Trojan
+  - Subscription
+   
+- name: Payment
+  type: select 
+  disable-udp: false
+  proxies:
+  - Best Latency
+  - Load Balance
+  - Fallback
+  - Manual Selected
+  - Traffic General
+  - Account Indonesian
+  - Account Singapore
+  - Account Vmess
+  - Account Vless
+  - Account Trojan
+  - Subscription
+  
+- name: WhatsApp
+  type: select 
+  disable-udp: false
+  proxies:
+  - Best Latency
+  - Load Balance
+  - Fallback
+  - Manual Selected
+  - Traffic General
+  - Account Indonesian
+  - Account Singapore
+  - Account Vmess
+  - Account Vless
+  - Account Trojan
+  - Subscription
+  
+- name: YouTube
+  type: select 
+  disable-udp: false
+  proxies:
+  - Best Latency
+  - Load Balance
+  - Fallback
+  - Manual Selected
+  - Traffic General
+  - Account Indonesian
+  - Account Singapore
+  - Account Vmess
+  - Account Vless
+  - Account Trojan
+  - Subscription
+  
+- name: Telegram
+  type: select 
+  disable-udp: false
+  proxies:
+  - Best Latency
+  - Load Balance
+  - Fallback
+  - Manual Selected
+  - Traffic General
+  - Account Indonesian
+  - Account Singapore
+  - Account Vmess
+  - Account Vless
+  - Account Trojan
+  - Subscription
+  
+- name: TikTok
+  type: select 
+  disable-udp: false
+  proxies:
+  - Best Latency
+  - Load Balance
+  - Fallback
+  - Manual Selected
+  - Traffic General
+  - Account Indonesian
+  - Account Singapore
+  - Account Vmess
+  - Account Vless
+  - Account Trojan
+  - Subscription
+  
+- name: Discord
+  type: select 
+  disable-udp: false
+  proxies:
+  - Best Latency
+  - Load Balance
+  - Fallback
+  - Manual Selected
+  - Traffic General
+  - Account Indonesian
+  - Account Singapore
+  - Account Vmess
+  - Account Vless
+  - Account Trojan
+  - Subscription
+  
+- name: Open AI
+  type: select 
+  disable-udp: false
+  proxies:
+  - Best Latency
+  - Load Balance
+  - Fallback
+  - Manual Selected
+  - Traffic General
+  - Account Indonesian
+  - Account Singapore
+  - Account Vmess
+  - Account Vless
+  - Account Trojan
+  - Subscription
+  
+- name: Nsfw
+  type: select 
+  disable-udp: false
+  proxies:
+  - REJECT  
+  - Best Latency
+  - Load Balance
+  - Fallback
+  - Manual Selected
+  - Traffic General
+  - Account Indonesian
+  - Account Singapore
+  - Account Vmess
+  - Account Vless
+  - Account Trojan
+  - Subscription
+  
+rule-providers:
+    
+  Gaming:
+        type: http
+        behavior: classical
+        path: ./rule_provider/rule_gaming.yaml
+        url: https://raw.githubusercontent.com/MilimNavaDemonLord/open_clash/main/rule_provider/rule_gaming.yaml
+        interval: 86400
+        
+  Games:
+       type: http
+       behavior: domain
+       url: https://raw.githubusercontent.com/MilimNavaDemonLord/open_clash/main/rule_provider/rule_games.yaml
+       path: ./rule_provider/rule_games.yaml
+       interval: 86400
+       
+  Portgames:
+       type: http
+       behavior: classical
+       path: ./rule_provider/rule_portgames.yaml
+       url: https://raw.githubusercontent.com/MilimNavaDemonLord/open_clash/main/rule_provider/rule_portgames.yaml
+       interval: 86400
+        
+  MLBB:
+        type: http
+        behavior: classical
+        path: ./rule_provider/rule_mlbb.yaml
+        url: https://raw.githubusercontent.com/MilimNavaDemonLord/open_clash/main/rule_provider/rule_mlbb.yaml
+        interval: 86400
+        
+  PortMlbb:
+        type: http
+        behavior: classical
+        path: ./rule_provider/rule_portmlbb.yaml
+        url: https://raw.githubusercontent.com/MilimNavaDemonLord/open_clash/main/rule_provider/rule_portmlbb.yaml
+        interval: 86400   
+        
+  TrafficID:
+        type: http
+        behavior: classical
+        path: ./rule_provider/rule_indo.yaml
+        url: https://raw.githubusercontent.com/MilimNavaDemonLord/open_clash/main/rule_provider/rule_indo.yaml
+        interval: 86400
+        
+  BlockAds:
+        type: http
+        behavior: classical
+        url: https://raw.githubusercontent.com/hillz2/openclash_adblock/main/oisd_big.yaml
+        path: ./rule_provider/oisd_big.yaml
+        interval: 86400
+        
+  Streaming:
+        type: http
+        behavior: classical
+        path: ./rule_provider/rule_streaming.yaml
+        url: https://raw.githubusercontent.com/MilimNavaDemonLord/open_clash/main/rule_provider/rule_streaming.yaml
+        interval: 86400
+       
+  Onlineshop:
+        type: http
+        behavior: classical
+        path: ./rule_provider/rule_onlineshop.yaml
+        url: https://raw.githubusercontent.com/MilimNavaDemonLord/open_clash/main/rule_provider/rule_onlineshop.yaml
+        interval: 86400
+   
+  Payment:
+        type: http
+        behavior: classical
+        path: ./rule_provider/rule_payment.yaml
+        url: https://raw.githubusercontent.com/MilimNavaDemonLord/open_clash/main/rule_provider/rule_payment.yaml
+        interval: 86400 
+ 
+  Whatsapp:
+        type: http
+        behavior: classical
+        path: ./rule_provider/rule_whatsapp.yaml
+        url: https://raw.githubusercontent.com/MilimNavaDemonLord/open_clash/main/rule_provider/rule_whatsapp.yaml
+        interval: 86400 
+        
+  Tiktok:
+        type: http
+        behavior: classical
+        url: https://raw.githubusercontent.com/MilimNavaDemonLord/open_clash/main/rule_provider/rule_tiktok.yaml
+        path: ./rule_provider/rule_tiktok.yaml
+        interval: 86400
+        
+  Telegram:
+        type: http
+        behavior: classical
+        path: ./rule_provider/rule_telegram.yaml
+        url: https://raw.githubusercontent.com/MilimNavaDemonLord/open_clash/main/rule_provider/rule_telegram.yaml
+        interval: 86400
+        
+  Telegramcidr:
+        type: http
+        behavior: ipcidr
+        url: https://raw.githubusercontent.com/MilimNavaDemonLord/open_clash/main/rule_provider/rule_telegramcidr.yaml
+        path: ./rule_provider/rule_telegramcidr.yaml
+        interval: 86400
+        
+  Youtube:
+        type: http
+        behavior: classical
+        path: ./rule_provider/rule_youtube.yaml
+        url: https://raw.githubusercontent.com/MilimNavaDemonLord/open_clash/main/rule_provider/rule_youtube.yaml
+        interval: 86400
+        
+  YoutubeMusic:
+        type: http
+        behavior: classical
+        path: ./rule_provider/rule_youtubemusic.yaml
+        url: https://raw.githubusercontent.com/MilimNavaDemonLord/open_clash/main/rule_provider/rule_youtubemusic.yaml
+        interval: 86400
+        
+  Bank-id:
+        type: http
+        behavior: domain
+        url: https://raw.githubusercontent.com/MilimNavaDemonLord/open_clash/main/rule_provider/rule_bank-id.yaml
+        path: ./rule_provider/rule_bank-id.yaml
+        interval: 86400
+        
+  Nsfw:
+        type: http
+        behavior: classical
+        url: https://raw.githubusercontent.com/MilimNavaDemonLord/open_clash/main/rule_provider/rule_nsfw.yaml
+        path: ./rule_provider/rule_nsfw.yaml
+        interval: 86400
+        
+  Metaverse:
+        type: http
+        behavior: domain
+        url: https://raw.githubusercontent.com/MilimNavaDemonLord/open_clash/main/rule_provider/rule_metaverse.yaml
+        path: ./rule_provider/rule_metaverse.yaml
+        interval: 86400
+        
+  Netflix:
+        type: http
+        behavior: domain
+        url: https://raw.githubusercontent.com/MilimNavaDemonLord/open_clash/main/rule_provider/rule_netflix.yaml
+        path: ./rule_provider/rule_netflix.yaml
+        interval: 86400
+        
+  Line:
+        type: http
+        behavior: classical
+        url: https://raw.githubusercontent.com/MilimNavaDemonLord/open_clash/main/rule_provider/rule_line.yaml
+        path: ./rule_provider/rule_line.yaml
+        interval: 86400
+        
+  Primevideo:
+       type: http
+       behavior: domain
+       url: https://raw.githubusercontent.com/MilimNavaDemonLord/open_clash/main/rule_provider/rule_primevideo.yaml
+       path: ./rule_provider/rule_primevideo.yaml
+       interval: 86400
+       
+  Umum:
+       type: http
+       behavior: classical
+       path: ./rule_provider/rule_umum.yaml
+       url: https://raw.githubusercontent.com/MilimNavaDemonLord/open_clash/main/rule_provider/rule_umum.yaml
+       interval: 86400
+       
+  Twitter:
+       type: http
+       behavior: classical
+       path: ./rule_provider/rule_twitter.yaml
+       url: https://raw.githubusercontent.com/MilimNavaDemonLord/open_clash/main/rule_provider/rule_twitter.yaml
+       interval: 86400
+       
+  Twitch:
+       type: http
+       behavior: domain
+       path: ./rule_provider/rule_twitch.yaml
+       url: https://raw.githubusercontent.com/MilimNavaDemonLord/open_clash/main/rule_provider/rule_twitch.yaml
+       interval: 86400
+       
+  DisneyPlus:
+       type: http
+       behavior: domain
+       path: ./rule_provider/rule_disneyplus.yaml
+       url: https://raw.githubusercontent.com/MilimNavaDemonLord/open_clash/main/rule_provider/rule_disneyplus.yaml
+       interval: 86400
+       
+  Discord:
+       type: http
+       behavior: domain
+       path: ./rule_provider/rule_discord.yaml
+       url: https://raw.githubusercontent.com/MilimNavaDemonLord/open_clash/main/rule_provider/rule_discord.yaml
+       interval: 86400
+       
+  iqiyi:
+      type: http
+      behavior: classical
+      url: https://raw.githubusercontent.com/MilimNavaDemonLord/open_clash/main/rule_provider/rule_iqiyi.yaml
+      path: ./rule_provider/rule_iqiyi.yaml
+      interval: 86400
+      
+  iqiyiinter:
+      type: http
+      behavior: classical
+      url: https://raw.githubusercontent.com/MilimNavaDemonLord/open_clash/main/rule_provider/rule_iqiyiinter.yaml
+      path: ./rule_provider/rule_iqiyiinter.yaml
+      interval: 86400
+      
+  Playstore:
+      type: http
+      behavior: domain
+      url: https://raw.githubusercontent.com/MilimNavaDemonLord/open_clash/main/rule_provider/rule_playstore.yaml
+      path: ./rule_provider/rule_playstore.yaml
+      interval: 86400
+      
+  Videoconferences:
+      type: http
+      behavior: classical
+      path: ./rule_provider/rule_videoconferences.yaml
+      url: https://raw.githubusercontent.com/MilimNavaDemonLord/open_clash/main/rule_provider/rule_videoconferences.yaml
+      interval: 86400
+      
+  Facebook:
+      type: http
+      behavior: classical
+      url: https://raw.githubusercontent.com/MilimNavaDemonLord/open_clash/main/rule_provider/rule_facebook.yaml
+      path: ./rule_provider/rule_facebook.yaml
+      interval: 86400
+      
+  Instagram:
+      type: http
+      behavior: classical
+      url: https://raw.githubusercontent.com/MilimNavaDemonLord/open_clash/main/rule_provider/rule_instagram.yaml
+      path: ./rule_provider/rule_instagram.yaml
+      interval: 86400
+      
+  Google:
+      type: http
+      behavior: classical
+      url: https://raw.githubusercontent.com/MilimNavaDemonLord/open_clash/main/rule_provider/rule_google.yaml
+      path: ./rule_provider/rule_google.yaml
+      interval: 86400
+      
+  GitHub:
+      type: http
+      behavior: classical
+      url: https://raw.githubusercontent.com/MilimNavaDemonLord/open_clash/main/rule_provider/rule_github.yaml
+      path: ./rule_provider/rule_github.yaml
+      interval: 86400
+      
+  Spotify:
+      type: http
+      behavior: classical
+      url: https://raw.githubusercontent.com/MilimNavaDemonLord/open_clash/main/rule_provider/rule_spotify.yaml
+      path: ./rule_provider/rule_spotify.yaml
+      interval: 86400
+      
+  ChatGPT:
+      type: http
+      behavior: classical
+      url: https://raw.githubusercontent.com/MilimNavaDemonLord/open_clash/main/rule_provider/rule_ChatGPT.yaml
+      path: ./rule_provider/rule_ChatGPT.yaml
+      interval: 86400
+      
+  OpenAI:
+      type: http
+      behavior: classical
+      url: https://raw.githubusercontent.com/MilimNavaDemonLord/open_clash/main/rule_provider/rule_OtherAIChat.yaml
+      path: ./rule_provider/rule_OtherAIChat.yaml
+      interval: 86400
+  
+rules:
+- IP-CIDR,198.18.0.1/16,REJECT,no-resolve
+ - GEOSITE,private,DIRECT
+ - GEOIP,private,DIRECT
+# - GEOSITE,rule-indo,Traffic Indonesian
+# - GEOSITE,rule-gaming,Gaming
+# - GEOSITE,category-ads-all,Block Ads
+# - GEOSITE,rule-sosmed,Social Media
+# - GEOSITE,oisd-nsfw,Nsfw
+# - GEOSITE,rule-umum,Traffic General
+- DOMAIN-SUFFIX,googlesyndication.com,Traffic General
+- DST-PORT,22,DIRECT
+- RULE-SET,TrafficID,Traffic Indonesian
+- RULE-SET,Bank-id,Traffic Indonesian
+- RULE-SET,MLBB,Gaming
+- RULE-SET,PortMlbb,Gaming
+- RULE-SET,Gaming,Gaming
+- RULE-SET,Games,Gaming
+- RULE-SET,Portgames,Gaming
+- RULE-SET,BlockAds,Block Ads
+- RULE-SET,Streaming,Streaming
+- RULE-SET,Discord,Discord
+- RULE-SET,Netflix,Streaming
+- RULE-SET,Twitch,Streaming
+- RULE-SET,DisneyPlus,Streaming
+- RULE-SET,Primevideo,Streaming
+- RULE-SET,iqiyi,Streaming
+- RULE-SET,iqiyiinter,Streaming
+- RULE-SET,Videoconferences,Streaming
+- RULE-SET,Spotify,Streaming
+- RULE-SET,Onlineshop,Online Shop
+- RULE-SET,Payment,Payment
+- RULE-SET,Youtube,YouTube
+- RULE-SET,YoutubeMusic,YouTube
+- RULE-SET,Telegram,Telegram
+- RULE-SET,Telegramcidr,Telegram
+- RULE-SET,Tiktok,TikTok
+- RULE-SET,Line,Social Media
+- RULE-SET,Whatsapp,WhatsApp
+- RULE-SET,Metaverse,Social Media
+- RULE-SET,Twitter,Social Media
+- RULE-SET,Facebook,Social Media
+- RULE-SET,Instagram,Social Media
+- RULE-SET,Umum,Traffic General
+- RULE-SET,Playstore,Traffic General
+- RULE-SET,Google,Traffic General
+- RULE-SET,GitHub,Traffic General
+- RULE-SET,ChatGPT,Open AI
+- RULE-SET,OpenAI,Open AI
+- RULE-SET,Nsfw,Nsfw
+- MATCH,GLOBAL
